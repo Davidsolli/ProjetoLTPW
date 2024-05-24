@@ -1,0 +1,60 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 23 de mai. de 2024, 19:02:44
+    Author     : HypeH
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(188, 188, 188);;
+}
+
+table {
+    box-shadow: 0 .4rem .8rem #0005;
+}
+
+td {
+    width: auto;
+    height: auto;
+    margin-right: .5rem;
+    vertical-align: middle;
+}
+
+tr {
+    background-color: white;
+}
+
+table, th, td {
+    
+    padding: 1rem;
+    border-collapse: collapse;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: purple;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgb(204, 204, 204);
+}
+
+tbody tr:hover {
+    background-color: white;
+}
