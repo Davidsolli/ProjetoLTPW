@@ -24,6 +24,7 @@
                 align-items: center;
                 width: 100vw;
                 height: 100vh;
+                background-color: rgb(230, 230, 230);
             }
             
             form {
@@ -37,11 +38,11 @@
                 text-align: center;
                 margin-bottom: 10px;
                 border: solid 1px black;
-                border-radius: 5px;
+                border-radius: 0px;
             }
             
             #btn-submit {
-                background: purple;
+                background: #4E19AE;
                 color: white;
                 transition: 0.5s;
             }
@@ -49,8 +50,8 @@
             #btn-submit:hover {
                 cursor: pointer;
                 background: white;
-                color: purple;
-                border: dashed 1px purple;
+                color: #4E19AE;
+                border: dashed 1px #4E19AE;
                 box-shadow: 0px 3px 10px 5px #DEC9E9;
             }
             
@@ -62,7 +63,7 @@
             form textarea {
                 text-align: center;
                 border: dotted black 1px;
-                border-radius: 5px; 
+                border-radius: 0px; 
                 color: black;
                 margin-bottom: 10px;
                 padding: 5em;

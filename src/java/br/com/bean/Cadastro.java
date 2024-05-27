@@ -50,10 +50,6 @@ public class Cadastro extends HttpServlet {
 
             RequestDispatcher rd = request.getRequestDispatcher("lista-produto.jsp");
             rd.forward(request, response);
-
-            /*out.println(produto.getNome());
-            out.println(produto.getDescricao());
-            out.println(produto.getValor());*/
         }
     }
 
