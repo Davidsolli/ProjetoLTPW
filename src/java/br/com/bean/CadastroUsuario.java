@@ -4,8 +4,8 @@
  */
 package br.com.bean;
 
-import br.com.controle.Produto;
-import jakarta.servlet.RequestDispatcher;
+import br.com.controle.Usuario;
+import br.com.entidade.CadastrarUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author HypeH
  */
-public class Cadastro extends HttpServlet {
+public class CadastroUsuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,19 +33,19 @@ public class Cadastro extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String nomeProduto = request.getParameter("nome-produto");
-            String descricaoProduto = request.getParameter("descricao-produto");
-            double valorProduto = Double.parseDouble(request.getParameter("valor-produto"));
+            String nome = request.getParameter("nome");
+            String senha = request.getParameter("senha");
+            int tel = Integer.parseInt(request.getParameter("tel"));
+            String email = request.getParameter("email");
 
-            Produto produto = new Produto(nomeProduto, descricaoProduto, valorProduto);
-
-            request.setAttribute("produto", produto);
-            request.setAttribute("nomeProduto", produto.getNome());
-            request.setAttribute("valorProduto", produto.getValor());
-            request.setAttribute("descricaoProduto", produto.getDescricao());
-
-            RequestDispatcher rd = request.getRequestDispatcher("lista-produto.jsp");
-            rd.forward(request, response);
+            Usuario usuario = new Usuario(nome, senha, tel, email);
+            
+            CadastrarUsuario dao = new CadastrarUsuario();
+            
+            try {
+                dao.inserir(usuario);
+            } catch (Exception e) {
+            }
         }
     }
 

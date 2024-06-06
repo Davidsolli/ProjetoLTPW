@@ -10,9 +10,24 @@ package br.com.controle;
  */
 public class Produto {
     
-    String nome;
-    String descricao;
-    double valor;
+    private int id;
+    private String nome;
+    private String descricao;
+    private double valor;
+
+    public Produto(String nome, String descricao, double valor) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.valor = valor;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
