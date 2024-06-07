@@ -12,6 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+            String email = (String) session.getAttribute("email");
+        %>
+
+        Seja bem Vindo : <%=email %> | <a href="#">Sair</a>
         <h1><a href="lista-produto.jsp">produtos</a></h1>
     </body>
 </html>

@@ -14,9 +14,9 @@
     <body>
         <form action="CadastroUsuario" method="POST">
             <input type="text" placeholder="nome" name="nome" required>
-            <input type="text" placeholder="senha" name="senha" required>
+            <input type="password" placeholder="senha" name="senha" required>
             <input type="text" placeholder="telefone" name="tel" required>
-            <input type="text" placeholder="email" name="email" required>
+            <input type="email" placeholder="email" name="email" required>
             <input type="submit" name="enviar">
         </form>
     </body>

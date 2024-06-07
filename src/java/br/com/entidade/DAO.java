@@ -18,18 +18,18 @@ import java.util.logging.Logger;
  */
 public class DAO {
 
-    Connection con;// criação do objeto conexao
+    static Connection con;// criação do objeto conexao
     PreparedStatement pst;//criação do objeto preparação de ambiente
     ResultSet rs;// criação do objeto que recebe resultados
 
-    public void conectarBanco() throws SQLException {// criando metodo para acessar o banco
+    public static Connection conectarBanco() throws SQLException {// criando metodo para acessar o banco
         try {
             Class.forName("com.mysql.jdbc.Driver");//classe para utilização do arquivo com configurções do serivdor mysql
             String url = "jdbc:mysql://localhost/cardapio";// drive servidor e banco de dados a serem utilizados e indicação do banco a ser utilizado
             String user = "root";// usuario do banco de dados
-            String senha = "";//senha do usuario do banco de dados    
-            con = (Connection) DriverManager.getConnection(url, user, senha);//metodo que usa os parametros para conectar com o banco
+            String senha = "";//senha do usuario do banco de dados
             System.out.println("Conectado ao banco de dados ");
+            con = DriverManager.getConnection(url, user, senha);//metodo que usa os parametros para conectar com o banco
         } catch (ClassNotFoundException ex) {//tratamento de erro de drive
             System.out.println("Classe não encontrada, adicione o driver nas bibliotecas.");
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -37,6 +37,7 @@ public class DAO {
             System.out.println(e);
             throw new RuntimeException(e);
         }
+        return con;
     }
 
     public void desconectarBanco() throws Exception {//criando metodo que fecha a conexão com o banco
