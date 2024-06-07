@@ -1,16 +1,12 @@
-<%-- 
-    Document   : login
-    Created on : 5 de jun. de 2024, 15:10:00
-    Author     : HypeH
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
         <style>
+            /* Inclua aqui os estilos CSS do header */
             * {
                 margin: 0;
                 padding: 0;
@@ -60,6 +56,32 @@
                 background: white;
                 border-radius: 10px;
             }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: white;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                border-radius: 0 0 10px 10px;
+            }
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            .dropdown:hover .dropbtn {
+                color: #4E19AE;
+                background: white;
+                border-radius: 10px 10px 0 0;
+            }
         </style>
     </head>
     <body>
@@ -67,25 +89,19 @@
             <a href="index.jsp" class="logo">Cardápio</a>
             <nav>
                 <ul>
+                    <li><a href="index.jsp">Home</a></li>
                     <li><a href="login.jsp">Login</a></li>
                     <li><a href="cadastro.jsp">Cadastro</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Perfil</a>
+                        <div class="dropdown-content">
+                            <a href="perfil.jsp">Ver Perfil</a>
+                            <a href="configuracoes.jsp">Configurações</a>
+                            <a href="logout.jsp">Logout</a>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </header>
-        <h2>Login</h2>
-        <form action="LoginUsuario" method="post">
-            Username: <input type="text" name="user" required><br>
-            Password: <input type="password" name="senha" required><br>
-            <input type="submit" value="Login">
-        </form>
-        <%
-            String usuario = request.getParameter("user");
-            String senha = request.getParameter("senha");
-            
-            if(usuario != null && senha != null && !usuario.isEmpty() && !senha.isEmpty()) {
-                session.setAttribute("usuario", usuario);
-                response.sendRedirect("lista-loja.jsp");
-            }
-        %>
     </body>
 </html>

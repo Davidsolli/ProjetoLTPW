@@ -57,7 +57,7 @@ public class LoginUsuario extends HttpServlet {
         } else {
             System.out.println(emailBuscado + "-" + email);
             System.out.println(senhaBuscada + "-" + senha);
-            request.getRequestDispatcher("index.html").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 

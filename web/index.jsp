@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
+<%-- 
+    Document   : index
+    Created on : 6 de jun. de 2024, 23:16:24
+    Author     : HypeH
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Cardápio</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +46,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 border-radius: 0px 0px 10px 10px;
             }
 
-            .logo{
+            .logo {
                 font-family: "Bebas Neue", sans-serif;
                 font-weight: 400;
                 font-style: normal;
@@ -56,12 +58,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 border-radius: 20px 0px;
             }
 
-            nav ul{
+            nav ul {
                 display: flex;
             }
 
-            nav ul li{
+            nav ul li {
                 list-style: none;
+                position: relative; /* Necessário para o dropdown */
             }
 
             nav ul li a {
@@ -73,33 +76,64 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             }
 
             nav ul li a:hover {
-                border-collapse: collapse;
                 color: #4E19AE;
                 background: white;
                 border-radius: 10px;
             }
-            
+
+            /* Estilos para o dropdown */
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: white;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                border-radius: 0 0 10px 10px;
+            }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropdown:hover .dropbtn {
+                color: #4E19AE;
+                background: white;
+                border-radius: 10px 10px 0 0;
+            }
+
             .container {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
             }
-            
-            .container h2{
+
+            .container h2 {
                 margin-bottom: 20px;
             }
-            
-            .container h2 span{
+
+            .container h2 span {
                 color: white;
                 background: #4E19AE;
                 padding: 10px;
                 border-radius: 10px 0px;
             }
-            
+
             .container h3 {
                 margin-bottom: 20px;
             }
-            
+
             .container p {
                 max-width: 900px;
                 margin-bottom: 20px;
@@ -108,7 +142,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 font-style: normal;
                 font-size: 25px;
             }
-            
+
             .container a {
                 text-decoration: none;
                 color: black;
@@ -121,7 +155,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 font-size: 25px;
                 border: dashed 1px black;
             }
-            
+
             .container a:hover {
                 border: dashed 1px #4E19AE;
                 background: white;
@@ -132,12 +166,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     </head>
     <body>
         <header>
-            <a href="index.html" class="logo">Cardápio</a>
+            <a href="index.jsp" class="logo">Cardápio</a>
             <nav>
                 <ul>
-                    <li><a href="index.html"> Home </a></li>
-                    <li><a href="login.jsp"> Login </a></li>
-                    <li><a href="cadastro.jsp"> Cadastro </a></li>
+                    <li><a href="login.jsp">Login</a></li>
+                    <li><a href="cadastro.jsp">Cadastro</a></li>
                 </ul>
             </nav>
         </header>

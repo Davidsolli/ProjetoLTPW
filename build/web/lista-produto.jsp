@@ -1,10 +1,3 @@
-<%-- 
-    Document   : lista-produto
-    Created on : 22 de mai. de 2024, 18:30:52
-    Author     : HypeH
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,12 +13,15 @@
             }
 
             body {
-                min-height: 100vh;
+                background-color: rgb(220, 220, 220);
+            }
+
+            .container {
+                height: 100vh;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                background-color: rgb(220, 220, 220);
             }
 
             table {
@@ -63,18 +59,18 @@
             tbody tr:hover {
                 background-color: white;
             }
-            
+
             tfoot tr {
                 background-color: white;
                 border: solid 2px #4E19AE;
             }
-            
+
             tfoot tr:hover {
                 border: dashed 2px #4E19AE;
                 cursor: pointer;
                 background-color: #B4BDE2;
             }
-            
+
             tfoot a {
                 text-decoration: none;
                 color: #4E19AE;
@@ -82,28 +78,39 @@
         </style>
     </head>
     <body>
-        <table>
-            <thead>
-                <tr>
-                    <th> Id </th>
-                    <th> Nome </th>
-                    <th> DescriÃ§Ã£o </th>
-                    <th> PreÃ§o </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> 1 </td>
-                    <td> ${nomeProduto} </td>
-                    <td> ${descricaoProduto} </td>
-                    <td> <strong>${valorProduto}</strong> </td>
-                </tr>
-            </tbody>
-            <tfoot>        
-                <tr>
-                    <td colspan="4"><a href="/Cardapio/form-cadastro.jsp"><center>Novo produto+</center></a></td>
-                </tr>
-            </tfoot>
-        </table>
+        <%@ include file="header.jsp" %>
+        <%
+            String usuario = (String) session.getAttribute("email");
+
+            if(usuario == null) {
+                response.sendRedirect("login.jsp");
+                System.out.println("Usuario não encontrado!");
+            } else {System.out.println("Logado!");}     
+        %>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Id </th>
+                        <th> Nome </th>
+                        <th> Descrição </th>
+                        <th> Preço </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> 1 </td>
+                        <td> ${nomeProduto} </td>
+                        <td> ${descricaoProduto} </td>
+                        <td> <strong>${valorProduto}</strong> </td>
+                    </tr>
+                </tbody>
+                <tfoot>        
+                    <tr>
+                        <td colspan="4"><a href="/Cardapio/form-cadastro.jsp"><center>Novo produto+</center></a></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </body>
 </html>

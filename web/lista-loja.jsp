@@ -12,11 +12,18 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%@ include file="header.jsp" %>
         <%
-            String email = (String) session.getAttribute("email");
+            String usuario = (String) session.getAttribute("email");
+            
+            if(usuario == null) {
+                response.sendRedirect("login.jsp");
+                System.out.println("Usuario não encontrado!");
+            } else {System.out.println("Logado!");} 
+            
         %>
 
-        Seja bem Vindo : <%=email %> | <a href="#">Sair</a>
+        Seja bem Vindo : <%=usuario %> | <a href="logout.jsp">Sair</a>
         <h1><a href="lista-produto.jsp">produtos</a></h1>
     </body>
 </html>
