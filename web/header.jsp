@@ -95,8 +95,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropbtn">Perfil</a>
                         <div class="dropdown-content">
-                            <a href="perfil.jsp">Ver Perfil</a>
-                            <a href="configuracoes.jsp">Configurações</a>
+                            <a href="perfil-usuario.jsp">Ver Perfil</a>
                             <a href="logout.jsp">Logout</a>
                         </div>
                     </li>
