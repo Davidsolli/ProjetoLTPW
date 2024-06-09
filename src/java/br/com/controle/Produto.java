@@ -14,6 +14,10 @@ public class Produto {
     private String nome;
     private String descricao;
     private double valor;
+    
+    private Loja loja = new Loja();
+    
+    public Produto() {}
 
     public Produto(String nome, String descricao, double valor) {
         this.nome = nome;
@@ -51,5 +55,13 @@ public class Produto {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
     }
 }

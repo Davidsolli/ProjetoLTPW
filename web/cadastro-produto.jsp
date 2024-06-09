@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="br.com.controle.Loja" %>
+<%@page import="br.com.controle.Produto" %>
+<%@page import="br.com.entidade.DAOLoja" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -72,21 +75,34 @@
         </style>
     </head>
     <body>
-        <%@ include file="header.jsp" %>
         <%
-            String usuario = (String) session.getAttribute("email");
+            String emailLoja = (String) session.getAttribute("email");
 
-            if(usuario == null) {
+            if(emailLoja == null) {
                 response.sendRedirect("login.jsp");
-                System.out.println("Usuario não encontrado!");
-            } else {System.out.println("Logado!");}
+                System.out.println("Email não encontrado!");
+                return;
+            }
+
+            Loja loja = DAOLoja.buscarPorEmail(emailLoja);
+
+            if(loja == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
+
+            Produto produto = new Produto();
+            produto.setLoja(loja);
+            System.out.println(produto.getLoja().getId());
         %>
+        <%@ include file="header.jsp" %>
         <main>
-            <form action="Cadastro" method="Post">
+            <form action="CadastroProduto" method="Post">
                 <label>Cadastre um novo produto!</label>
                 <input type="text" placeholder="Nome do produto" name="nome-produto" required>
                 <input type="text" name="valor-produto" placeholder="Valor do produto" required>
                 <textarea name="descricao-produto" rows="5" cols="10" placeholder="Descrição do produto" required></textarea>
+                <input type="hidden" name="loja-id" value="<%= loja.getId() %>">
                 <input id="btn-submit" type="submit" name="enviar">
             </form>
         </main>

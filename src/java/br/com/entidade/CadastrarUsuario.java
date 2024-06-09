@@ -35,13 +35,12 @@ public class CadastrarUsuario extends DAO {
         }
     }
     
-     public static Usuario buscarPorEmail(String email) {
+    public static Usuario buscarPorEmail(String email) {
         Usuario usuario = null;
         String sql = "SELECT * FROM usuario WHERE email = ?";
 
-        try (Connection conn = DAO.conectarBanco();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
+        try (Connection conn = DAO.conectarBanco(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
 

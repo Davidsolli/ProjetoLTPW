@@ -72,19 +72,31 @@
                 </ul>
             </nav>
         </header>
-        <h2>Login</h2>
         <form action="LoginUsuario" method="post">
-            Username: <input type="text" name="user" required><br>
-            Password: <input type="password" name="senha" required><br>
+            <label>Login cliente</label>
+            <input type="text" name="user" placeholder="Email" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <input type="submit" value="Login">
+        </form>
+        <form action="LoginLoja" method="post">
+            <label>Login loja</label>
+            <input type="text" name="user" placeholder="Email" required>
+            <input type="password" name="senha" placeholder="Senha" required>
             <input type="submit" value="Login">
         </form>
         <%
             String usuario = request.getParameter("user");
             String senha = request.getParameter("senha");
+            String action = request.getParameter("action");
             
-            if(usuario != null && senha != null && !usuario.isEmpty() && !senha.isEmpty()) {
-                session.setAttribute("usuario", usuario);
-                response.sendRedirect("lista-loja.jsp");
+            if (usuario != null && senha != null && !usuario.isEmpty() && !senha.isEmpty()) {
+                if ("LoginUsuario".equals(action)) {
+                    session.setAttribute("usuario", usuario);
+                    response.sendRedirect("lista-usuario.jsp");
+                } else if ("LoginLoja".equals(action)) {
+                    session.setAttribute("loja", usuario); // Assume `usuario` é usado para loja também.
+                    response.sendRedirect("lista-loja.jsp");
+                }
             }
         %>
     </body>

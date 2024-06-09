@@ -4,11 +4,13 @@
  */
 package br.com.bean;
 
+import br.com.controle.Loja;
 import br.com.controle.Produto;
-import jakarta.servlet.RequestDispatcher;
+import br.com.entidade.DAOProduto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +19,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author HypeH
  */
-public class Cadastro extends HttpServlet {
+@WebServlet(name = "CadastroProduto", urlPatterns = {"/CadastroProduto"})
+public class CadastroProduto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,16 +39,25 @@ public class Cadastro extends HttpServlet {
             String nomeProduto = request.getParameter("nome-produto");
             String descricaoProduto = request.getParameter("descricao-produto");
             double valorProduto = Double.parseDouble(request.getParameter("valor-produto"));
+            int lojaId = Integer.parseInt(request.getParameter("loja-id"));
+            
+            Loja loja = new Loja();
+            loja.setId(lojaId);
 
             Produto produto = new Produto(nomeProduto, descricaoProduto, valorProduto);
 
-            request.setAttribute("produto", produto);
-            request.setAttribute("nomeProduto", produto.getNome());
-            request.setAttribute("valorProduto", produto.getValor());
-            request.setAttribute("descricaoProduto", produto.getDescricao());
+            DAOProduto produtoDao = new DAOProduto();
+            produto.setLoja(loja);
 
-            RequestDispatcher rd = request.getRequestDispatcher("lista-produto.jsp");
-            rd.forward(request, response);
+            try {
+                produtoDao.inserirLoja(produto);
+                out.println("Produto cadastrado com sucesso!");
+            } catch (Exception e) {
+                out.println("Erro ao cadastrar produto: " + e.getMessage());
+            }
+
+            /*RequestDispatcher rd = request.getRequestDispatcher("lista-produto.jsp");
+            rd.forward(request, response);*/
         }
     }
 
