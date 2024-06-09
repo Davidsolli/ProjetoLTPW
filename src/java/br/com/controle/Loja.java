@@ -15,6 +15,8 @@ public class Loja {
     private String senha;
     private int telefone;
     private String email;
+    
+    public Loja() {}
 
     public Loja(String nome, String senha, int telefone, String email) {
         this.nome = nome;

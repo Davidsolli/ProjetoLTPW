@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author HypeH
  */
 @WebServlet(name = "ListaDadosUsuario", urlPatterns = {"/ListaDadosUsuario"})
-public class ListaDadosUsuario extends HttpServlet {
+public class AtualizaDadosUsuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

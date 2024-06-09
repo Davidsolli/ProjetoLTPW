@@ -4,11 +4,12 @@
  */
 package br.com.bean;
 
-import br.com.controle.Usuario;
-import br.com.entidade.CadastrarUsuario;
+import br.com.controle.Loja;
+import br.com.entidade.DAOLoja;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author HypeH
  */
-public class CadastroUsuario extends HttpServlet {
+@WebServlet(name = "CadastroLoja", urlPatterns = {"/CadastroLoja"})
+public class CadastroLoja extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,19 +34,20 @@ public class CadastroUsuario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            String nome = request.getParameter("nome");
+            
+            String nome = request.getParameter("nomeComercio");
             String senha = request.getParameter("senha");
             int tel = Integer.parseInt(request.getParameter("tel"));
             String email = request.getParameter("email");
 
-            Usuario usuario = new Usuario(nome, senha, tel, email);
+            Loja loja = new Loja(nome, senha, tel, email);
             
-            CadastrarUsuario dao = new CadastrarUsuario();
+            DAOLoja lojaDao = new DAOLoja();
             
             try {
-                dao.inserirUsuario(usuario);
+                lojaDao.inserirLoja(loja);
             } catch (Exception e) {
+                
             }
         }
     }

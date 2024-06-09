@@ -90,8 +90,6 @@
             <nav>
                 <ul>
                     <li><a href="index.jsp">Home</a></li>
-                    <li><a href="login.jsp">Login</a></li>
-                    <li><a href="cadastro.jsp">Cadastro</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropbtn">Perfil</a>
                         <div class="dropdown-content">

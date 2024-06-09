@@ -16,7 +16,7 @@ import java.sql.Connection;
  */
 public class CadastrarUsuario extends DAO {
 
-    public void inserir(Usuario usuario) throws Exception {
+    public void inserirUsuario(Usuario usuario) throws Exception {
         String query = "INSERT INTO usuario(nome, senha, tel, email) "
                 + "values(?, ?, ?, ?)";
         try {
@@ -40,7 +40,7 @@ public class CadastrarUsuario extends DAO {
         String sql = "SELECT * FROM usuario WHERE email = ?";
 
         try (Connection conn = DAO.conectarBanco();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
             
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
@@ -63,7 +63,8 @@ public class CadastrarUsuario extends DAO {
     public static boolean atualizarUsuario(Usuario usuario) {
         String sql = "UPDATE usuario SET nome = ?, senha = ?, tel = ?, email = ? WHERE usuario_id = ?";
 
-        try (Connection conn = DAO.conectarBanco(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DAO.conectarBanco(); 
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getSenha());

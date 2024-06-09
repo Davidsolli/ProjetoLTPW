@@ -73,7 +73,16 @@
             </nav>
         </header>
         <form action="CadastroUsuario" method="POST">
+            <label><h2>Cadastro de cliente</h2></label>
             <input type="text" placeholder="nome" name="nome" required>
+            <input type="password" placeholder="senha" name="senha" required>
+            <input type="text" placeholder="telefone" name="tel" required>
+            <input type="email" placeholder="email" name="email" required>
+            <input type="submit" name="enviar">
+        </form>
+        <form action="CadastroLoja" method="POST">
+            <label><h2>Cadastro de loja</h2></label>
+            <input type="text" placeholder="nome do comercio" name="nomeComercio" required>
             <input type="password" placeholder="senha" name="senha" required>
             <input type="text" placeholder="telefone" name="tel" required>
             <input type="email" placeholder="email" name="email" required>
