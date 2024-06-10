@@ -20,7 +20,7 @@
         %>
         Seja bem-vindo : <%= usuario %> | <a href="logout.jsp">Sair</a>
 
-        <h1><a href="lista-produto.jsp">Produtos</a></h1>
+        <h1>Produtos</h1>
 
         <h2>Lista de Lojas</h2>
         <%
@@ -34,6 +34,7 @@
         %>
         <table border="1">
             <tr>
+                <th>ID</th>
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Email</th>
@@ -43,7 +44,8 @@
                     for (Loja loja : listaLojas) {
             %>
             <tr>
-                <td><%= loja.getNome() %></td>
+                <td><%= loja.getId()%></td>
+                <td><a href="lista-produto.jsp?lojaId=<%= loja.getId() %>"><%= loja.getNome() %></a></td>
                 <td><%= loja.getTelefone() %></td>
                 <td><%= loja.getEmail() %></td>
             </tr>
@@ -52,7 +54,7 @@
                 } else {
             %>
             <tr>
-                <td colspan="3">Nenhuma loja encontrada.</td>
+                <td colspan="4">Nenhuma loja encontrada.</td>
             </tr>
             <% 
                 }

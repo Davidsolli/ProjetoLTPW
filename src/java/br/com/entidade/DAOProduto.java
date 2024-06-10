@@ -6,12 +6,17 @@ package br.com.entidade;
 
 import br.com.controle.Produto;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author HypeH
  */
 public class DAOProduto extends DAO {
+    
     public void inserirLoja(Produto produto) throws Exception {
         
         String query = "INSERT INTO produto(nome_produto, valor, descricao, loja_id) "
@@ -33,4 +38,27 @@ public class DAOProduto extends DAO {
             System.out.println("Erro " + e.getMessage());
         }
     }
+    
+public ArrayList<Produto> listarProdutosPorLoja(int lojaId) throws Exception {
+    ArrayList<Produto> produtos = new ArrayList<>();
+    String sql = "SELECT * FROM produto WHERE loja_id = ?;";
+    try (Connection conn = conectarBanco(); 
+         PreparedStatement pst = conn.prepareStatement(sql)) {
+        pst.setInt(1, lojaId);
+        try (ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("produto_id"));
+                produto.setNome(rs.getString("nome_produto"));
+                produto.setValor(rs.getDouble("valor")); // Certifique-se de que o nome do método é getPreco()
+                produto.setDescricao(rs.getString("descricao"));
+                produtos.add(produto);
+            }
+        }
+    } catch (SQLException e) {
+        throw new SQLException("Erro ao listar produtos por loja: " + e.getMessage(), e);
+    }
+    return produtos;
+}
+
 }
