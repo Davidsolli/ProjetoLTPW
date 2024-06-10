@@ -7,6 +7,7 @@ package br.com.bean;
 import br.com.controle.Loja;
 import br.com.controle.Produto;
 import br.com.entidade.DAOProduto;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -56,8 +57,8 @@ public class CadastroProduto extends HttpServlet {
                 out.println("Erro ao cadastrar produto: " + e.getMessage());
             }
 
-            /*RequestDispatcher rd = request.getRequestDispatcher("lista-produto.jsp");
-            rd.forward(request, response);*/
+            RequestDispatcher rd = request.getRequestDispatcher("perfil-loja.jsp");
+            rd.forward(request, response);
         }
     }
 

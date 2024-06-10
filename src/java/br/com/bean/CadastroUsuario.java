@@ -5,7 +5,7 @@
 package br.com.bean;
 
 import br.com.controle.Usuario;
-import br.com.entidade.CadastrarUsuario;
+import br.com.entidade.DAOUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -40,7 +40,7 @@ public class CadastroUsuario extends HttpServlet {
 
             Usuario usuario = new Usuario(nome, senha, tel, email);
             
-            CadastrarUsuario usuarioDao = new CadastrarUsuario();
+            DAOUsuario usuarioDao = new DAOUsuario();
             
             try {
                 usuarioDao.inserirUsuario(usuario);

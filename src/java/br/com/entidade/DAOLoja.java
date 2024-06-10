@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -40,9 +41,9 @@ public class DAOLoja extends DAO {
     public static Loja buscarPorEmail(String email) {
 
         Loja loja = null;
-        String sql = "SELECT * FROM loja WHERE email = ?";
+        String query = "SELECT * FROM loja WHERE email = ?";
 
-        try (Connection conn = DAO.conectarBanco(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DAO.conectarBanco(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
@@ -60,5 +61,24 @@ public class DAOLoja extends DAO {
         }
 
         return loja;
+    }
+    
+    public ArrayList<Loja> listarLoja() throws Exception {
+        ArrayList<Loja> lojas = new ArrayList<>();
+        try (Connection conn = conectarBanco(); PreparedStatement pst = conn.prepareStatement("SELECT * FROM loja");
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                Loja loja = new Loja();
+                loja.setId(rs.getInt("loja_id"));
+                loja.setNome(rs.getString("nome_loja"));
+                loja.setSenha(rs.getString("senha"));
+                loja.setTelefone(rs.getInt("tel_loja"));
+                loja.setEmail(rs.getString("email"));
+                lojas.add(loja);
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao listar lojas: " + e.getMessage());
+        }
+        return lojas;
     }
 }

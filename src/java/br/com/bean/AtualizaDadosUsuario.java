@@ -5,9 +5,8 @@
 package br.com.bean;
 
 import br.com.controle.Usuario;
-import br.com.entidade.CadastrarUsuario;
+import br.com.entidade.DAOUsuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -45,7 +44,7 @@ public class AtualizaDadosUsuario extends HttpServlet {
         usuario.setTelefone(telefone);
         usuario.setEmail(email);
 
-        boolean atualizado = CadastrarUsuario.atualizarUsuario(usuario);
+        boolean atualizado = DAOUsuario.atualizarUsuario(usuario);
 
         if (atualizado) {
             response.sendRedirect("lista-loja.jsp");
