@@ -4,7 +4,8 @@
  */
 package br.com.bean;
 
-import br.com.entidade.DAO;
+import br.com.controle.Produto;
+import br.com.entidade.DAOProduto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,17 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  *
  * @author HypeH
  */
-@WebServlet(name = "LoginLoja", urlPatterns = {"/LoginLoja"})
-public class LoginLoja extends HttpServlet {
+@WebServlet(name = "EditarProduto", urlPatterns = {"/EditarProduto"})
+public class EditarProduto extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,7 +36,6 @@ public class LoginLoja extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
         }
     }
 
@@ -67,49 +65,35 @@ public class LoginLoja extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String emailBuscado = "";
-        String senhaBuscada = "";
-        Connection con;
-        String email = request.getParameter("user");
-        String senha = request.getParameter("senha");
-        String sql = "Select * from loja where email = ? and senha = ?";
+        request.setCharacterEncoding("UTF-8");
 
+        String idParam = request.getParameter("id");
+        String nome = request.getParameter("nome");
+        String descricao = request.getParameter("descricao");
+        String valorParam = request.getParameter("valor");
+
+        if (idParam == null || nome == null || descricao == null || valorParam == null
+                || idParam.isEmpty() || nome.isEmpty() || descricao.isEmpty() || valorParam.isEmpty()) {
+            System.out.println("Deu errado");
+            return;
+        }
+
+        int id = Integer.parseInt(idParam);
+        double valor = Double.parseDouble(valorParam);
+
+        Produto produto = new Produto();
+        produto.setId(id);
+        produto.setNome(nome);
+        produto.setDescricao(descricao);
+        produto.setValor(valor);
+
+        DAOProduto produtoDAO = new DAOProduto();
         try {
-            con = DAO.conectarBanco();
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, email);
-            stmt.setString(2, senha);
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                emailBuscado = rs.getString("email");
-                senhaBuscada = rs.getString("senha");
-            }
-            rs.close();
-            stmt.close();
+            produtoDAO.atualizarProduto(produto);
+            response.sendRedirect("lista-loja.jsp");
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if (emailBuscado.equals(email) || senhaBuscada.equals(senha)) {
-            HttpSession session = request.getSession();
-            session.setAttribute("email", email);
-            request.getRequestDispatcher("lista-loja.jsp").forward(request, response);
-        } else {
-            System.out.println(emailBuscado + "-" + email);
-            System.out.println(senhaBuscada + "-" + senha);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            response.sendRedirect("erro.jsp");
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

@@ -37,7 +37,7 @@ public class DAOLoja extends DAO {
             System.out.println("Erro " + e.getMessage());
         }
     }
-    
+
     public static Loja buscarPorEmail(String email) {
 
         Loja loja = null;
@@ -62,11 +62,10 @@ public class DAOLoja extends DAO {
 
         return loja;
     }
-    
+
     public ArrayList<Loja> listarLoja() throws Exception {
         ArrayList<Loja> lojas = new ArrayList<>();
-        try (Connection conn = conectarBanco(); PreparedStatement pst = conn.prepareStatement("SELECT * FROM loja");
-             ResultSet rs = pst.executeQuery()) {
+        try (Connection conn = conectarBanco(); PreparedStatement pst = conn.prepareStatement("SELECT * FROM loja"); ResultSet rs = pst.executeQuery()) {
             while (rs.next()) {
                 Loja loja = new Loja();
                 loja.setId(rs.getInt("loja_id"));

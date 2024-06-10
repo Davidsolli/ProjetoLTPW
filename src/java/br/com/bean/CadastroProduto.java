@@ -57,7 +57,7 @@ public class CadastroProduto extends HttpServlet {
                 out.println("Erro ao cadastrar produto: " + e.getMessage());
             }
 
-            RequestDispatcher rd = request.getRequestDispatcher("perfil-loja.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("lista-loja.jsp");
             rd.forward(request, response);
         }
     }
