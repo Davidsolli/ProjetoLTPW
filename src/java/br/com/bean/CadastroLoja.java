@@ -49,6 +49,7 @@ public class CadastroLoja extends HttpServlet {
             } catch (Exception e) {
                 
             }
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 

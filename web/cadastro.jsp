@@ -153,7 +153,7 @@
             <a href="/Cardapio/index.html" class="logo">sabor online</a>
             <nav>
                 <ul>
-                    <li><a href="/Cardapio/index.html">Home</a></li>
+                    <li><a href="/Cardapio/index.jsp">Home</a></li>
                     <li><a href="login.jsp">Login</a></li>
                 </ul>
             </nav>

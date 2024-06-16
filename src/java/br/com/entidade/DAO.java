@@ -27,7 +27,7 @@ public class DAO {
             Class.forName("com.mysql.jdbc.Driver");//classe para utilização do arquivo com configurções do serivdor mysql
             String url = "jdbc:mysql://localhost/cardapio";// drive servidor e banco de dados a serem utilizados e indicação do banco a ser utilizado
             String user = "root";// usuario do banco de dados
-            String senha = "";//senha do usuario do banco de dados
+            String senha = "david95118982";//senha do usuario do banco de dados
             System.out.println("Conectado ao banco de dados ");
             con = DriverManager.getConnection(url, user, senha);//metodo que usa os parametros para conectar com o banco
         } catch (ClassNotFoundException ex) {//tratamento de erro de drive

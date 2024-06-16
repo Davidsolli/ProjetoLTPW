@@ -1,15 +1,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="br.com.controle.Loja" %>
+<%@page import="br.com.controle.Usuario" %>
 <%@page import="br.com.controle.Produto" %>
 <%@page import="br.com.entidade.DAOLoja" %>
 <%@page import="br.com.entidade.DAOProduto" %>
+<%@page import="br.com.entidade.DAOUsuario" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lista de Produtos</title>
-        <style>
+                <style>
             * {
                 margin: 0;
                 padding: 0;
@@ -67,10 +69,6 @@
                 text-decoration: none;
             }
 
-            a:hover {
-                text-decoration: underline;
-            }
-
             .welcome, .logout {
                 text-align: center;
                 margin-bottom: 20px;
@@ -120,9 +118,18 @@
     <body>
         <%@ include file="header.jsp" %>
         <% 
-            String usuario = (String) session.getAttribute("email");
-            if (usuario == null) {
+            String usuarioEmail = (String) session.getAttribute("email");
+            if (usuarioEmail == null) {
                 response.sendRedirect("login.jsp");
+                return;
+            }
+            
+            DAOUsuario usuarioDAO = new DAOUsuario();
+            Usuario usuario = new Usuario();
+            usuario = usuarioDAO.buscarPorEmail(usuarioEmail);
+            Integer usuarioID = usuario.getId();
+            if (usuarioID == null || usuarioID == -1) {
+                out.println("ID do usuário não disponível.");
                 return;
             }
         %>
@@ -135,7 +142,6 @@
                 }
                 int lojaID = Integer.parseInt(lojaIdParam);
 
-                // Aqui você pode usar o ID da loja para buscar os produtos
                 DAOProduto produtoDAO = new DAOProduto();
                 ArrayList<Produto> listaProdutos = null;
                 try {
@@ -144,12 +150,10 @@
                     out.println("Erro ao listar produtos: " + e.getMessage());
                 }
 
-                // Verificação do email da loja na sessão
-                String emailLoja = (String) session.getAttribute("email");
                 DAOLoja lojaDAO = new DAOLoja();
                 Loja lojaSessao = null;
                 try {
-                    lojaSessao = lojaDAO.buscarPorEmail(emailLoja);
+                    lojaSessao = lojaDAO.buscarPorEmail(usuarioEmail);
                 } catch (Exception e) {
                     out.println("Erro ao buscar loja: " + e.getMessage());
                 }
@@ -165,9 +169,7 @@
                         <th>Nome</th>
                         <th>Descrição</th>
                         <th>Preço</th>
-                            <% if (lojaSessaoID == lojaID) { %>
                         <th>Ações</th>
-                            <% } %>
                     </tr>
                 </thead>
                 <tbody>
@@ -180,8 +182,9 @@
                         <td><%= produto.getNome() %></td>
                         <td><%= produto.getDescricao() %></td>
                         <td><%= produto.getValor() %></td>
-                        <% if (lojaSessaoID == lojaID) { %>
                         <td class="actions">
+                            <a href="comprar-produto.jsp?id=<%= produto.getId() %>&lojaId=<%= lojaID %>&usuarioId=<%= usuarioID %>">Comprar</a>
+                            <% if (lojaSessaoID == lojaID) { %>
                             <a href="editar-produto.jsp?id=<%= produto.getId() %>">Editar</a>
                             <a href="excluir-produto.jsp?id=<%= produto.getId() %>&lojaId=<%= lojaID %>">Excluir</a>
                         </td>

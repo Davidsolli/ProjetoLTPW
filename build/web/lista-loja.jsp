@@ -63,10 +63,6 @@
                 text-decoration: none;
             }
 
-            a:hover {
-                text-decoration: underline;
-            }
-
             .logout {
                 text-align: right;
             }
@@ -79,6 +75,7 @@
                 backdrop-filter: blur(10px);
                 padding: 5px 5px;
                 margin: 5px;
+                z-index: -1;
             }
 
             .btn-cadastrar {

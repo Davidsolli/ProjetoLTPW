@@ -6,6 +6,7 @@ package br.com.bean;
 
 import br.com.controle.Usuario;
 import br.com.entidade.DAOUsuario;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -45,7 +46,9 @@ public class CadastroUsuario extends HttpServlet {
             try {
                 usuarioDao.inserirUsuario(usuario);
             } catch (Exception e) {
+                System.out.println(e);
             }
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 

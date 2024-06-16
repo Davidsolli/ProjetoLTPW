@@ -197,7 +197,7 @@
                 the undoubtable source.
             </p>
             <h3>Confira nossas lojas!</h3>
-            <a href="/Cardapio/lista-produto.jsp">Lojas</a>
+            <a href="/Cardapio/login.jsp">Lojas</a>
         </div>
     </main>
 
